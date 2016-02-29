@@ -17,7 +17,7 @@ window.onload = function() {
 
   function create () {
     //Setting up the world
-    game.world.setBounds(0,0,3000, 600);
+    game.world.setBounds(0, 0, 3000, 600);
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.add.sprite(0, 0, 'sky');
     game.add.sprite(800, 0, 'sky');
@@ -28,11 +28,11 @@ window.onload = function() {
     ground.body.immovable = true;
 
     //Create the player
-    player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+    player = game.add.sprite(50, game.world.centerY, 'player');
     game.physics.arcade.enable(player);
-    player.body.bounce.y = 0.3;
-    player.body.gravity.y = 400;
-    player.body.collideWorldBounds = false;
+    player.body.bounce.y = 0.2;
+    player.body.gravity.y = 200;
+    player.body.collideWorldBounds = true;
     player.animations.add('left', [0, 1, 2, 3], 10, true);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
 
@@ -60,6 +60,10 @@ window.onload = function() {
       player.frame = 4;
     }
 
+    if (cursors.up.isDown && player.body.touching.down) {
+      player.body.velocity.y = -300;
+    }
+
     // I want to figure out how to remove the player if they fall
 
     //set the x and y positions of the camera to the same as t
@@ -68,9 +72,6 @@ window.onload = function() {
 
 
   function render() {
-
-      game.debug.cameraInfo(game.camera, 32, 32);
-      game.debug.spriteCoords(player, 32, 500);
 
   }
 
