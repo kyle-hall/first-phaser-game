@@ -4,7 +4,7 @@ window.onload = function() {
   var game = new Phaser.Game(
     window.innerWidth, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render }
   );
-  var player, platforms;
+  var player, platforms, cursors;
 
   function preload () {
 
@@ -56,8 +56,8 @@ window.onload = function() {
       player.body.velocity.x = 150;
       player.animations.play('right');
     } else {
-      player.body.velocity.x = 0;
-      player.frame = 4;
+        player.body.velocity.x = 0;
+        player.frame = 4;
     }
 
     if (cursors.up.isDown && player.body.touching.down) {
@@ -65,9 +65,6 @@ window.onload = function() {
     }
 
     // I want to figure out how to remove the player if they fall
-
-    //set the x and y positions of the camera to the same as t
-
   }
 
 
