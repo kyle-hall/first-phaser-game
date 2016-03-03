@@ -5,6 +5,7 @@ window.onload = function() {
     window.innerWidth, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render }
   );
   var player, platforms, cursors;
+  var jumpTimer = 0;
 
   function preload () {
 
@@ -30,8 +31,8 @@ window.onload = function() {
     //Create the player
     player = game.add.sprite(50, game.world.centerY, 'player');
     game.physics.arcade.enable(player);
-    player.body.bounce.y = 0.2;
-    player.body.gravity.y = 200;
+    player.body.bounce.y = 0.1;
+    player.body.gravity.y = 400;
     player.body.collideWorldBounds = true;
     player.animations.add('left', [0, 1, 2, 3], 10, true);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
@@ -60,8 +61,16 @@ window.onload = function() {
         player.frame = 4;
     }
 
-    if (cursors.up.isDown && player.body.touching.down) {
-      player.body.velocity.y = -300;
+    if (cursors.up.isDown) {
+      if (player.body.touching.down && jumpTimer === 0) {
+        player.body.velocity.y = -150;
+        jumpTimer = 1;
+      } else if (jumpTimer < 16 && jumpTimer > 0) {
+        player.body.velocity.y = -150 + (-(jumpTimer * 9));
+        jumpTimer++;
+      }
+    } else {
+      jumpTimer = 0;
     }
 
     // I want to figure out how to remove the player if they fall
