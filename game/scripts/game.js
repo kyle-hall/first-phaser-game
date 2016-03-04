@@ -33,6 +33,26 @@ window.onload = function() {
     var ground = platforms.create(-500, game.world.height - 64, 'ground');
     ground.scale.setTo(10, 2);
     ground.body.immovable = true;
+    
+    //Create the series of platforms for the player to jump on
+    var ledge = platforms.create(200, game.world.height - 200, 'ground');
+    ledge.enableBody = true;
+    ledge.body.immovable = true;
+    ledge = platforms.create(500, 150, 'ground');
+    ledge.enableBody = true;
+    ledge.body.immovable = true;
+    ledge = platforms.create(750, 300, 'ground');
+    ledge.enableBody = true;
+    ledge.body.immovable = true;
+    ledge = platforms.create(1200, 250, 'ground');
+    ledge.enableBody = true;
+    ledge.body.immovable = true;
+    ledge = platforms.create(2200, 250, 'ground');
+    ledge.enableBody = true;
+    ledge.body.immovable = true;
+    ledge = platforms.create(2900, 250, 'ground');
+    ledge.enableBody = true;
+    ledge.body.immovable = true;
 
     //Create the player
     player = game.add.sprite(50, game.world.centerY, 'player');
