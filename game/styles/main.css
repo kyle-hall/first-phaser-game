@@ -6,3 +6,9 @@ body {
   padding-bottom: 0;
   padding-top: 25px;
 }
+
+canvas {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
