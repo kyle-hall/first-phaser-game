@@ -2,9 +2,9 @@
 window.onload = function() {
 
   var game = new Phaser.Game(
-    window.innerWidth, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render }
+    window.innerWidth - 200, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render }
   );
-  var player, platforms, cursors;
+  var player, platforms, cursors, bg;
   var jumpTimer = 0;
 
   function preload () {
@@ -18,14 +18,20 @@ window.onload = function() {
 
   function create () {
     //Setting up the world
-    game.world.setBounds(0, 0, 3000, 600);
+    game.world.setBounds(0, 0, 3200, 600);
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.add.sprite(0, 0, 'sky');
     game.add.sprite(800, 0, 'sky');
+    game.add.sprite(1600, 0, 'sky');
+    game.add.sprite(2400, 0, 'sky');
+    
+    //Create the platform group
     platforms = game.add.group();
     platforms.enableBody = true;
+    
+    //Create the ground layer
     var ground = platforms.create(-500, game.world.height - 64, 'ground');
-    ground.scale.setTo(10, 1);
+    ground.scale.setTo(10, 2);
     ground.body.immovable = true;
 
     //Create the player
