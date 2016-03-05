@@ -30,8 +30,12 @@ window.onload = function() {
     platforms.enableBody = true;
     
     //Create the ground layer
-    var ground = platforms.create(-500, game.world.height - 64, 'ground');
-    ground.scale.setTo(10, 2);
+    var ground = platforms.create(0, game.world.height - 64, 'ground');
+    ground.scale.setTo(3, 2);
+    ground.body.immovable = true;
+    
+    ground = platforms.create(1470, game.world.height - 64, 'ground');
+    ground.scale.setTo(3,2);
     ground.body.immovable = true;
     
     //Create the series of platforms for the player to jump on
@@ -57,9 +61,13 @@ window.onload = function() {
     //Create the player
     player = game.add.sprite(50, game.world.centerY, 'player');
     game.physics.arcade.enable(player);
-    player.body.bounce.y = 0.1;
-    player.body.gravity.y = 300;
-    player.body.collideWorldBounds = true;
+    player.body.bounce.y = 0.2;
+    player.body.gravity.y = 400;
+    player.body.maxVelocity.y = 500;
+    player.body.collideWorldBounds = false;
+    player.checkWorldBounds = true;
+    player.outOfBoundsKill = true;
+    player.body.setSize(20, 32, 5, 16);
     player.animations.add('left', [0, 1, 2, 3], 10, true);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
 
@@ -69,7 +77,6 @@ window.onload = function() {
     //Set the camera to follow the player
     game.camera.follow(player);
 
-
   }
 
   function update() {
@@ -77,10 +84,10 @@ window.onload = function() {
 
     //Poll for movements
     if (cursors.left.isDown) {
-      player.body.velocity.x = -150;
+      player.body.velocity.x = -200;
       player.animations.play('left');
     } else if (cursors.right.isDown) {
-      player.body.velocity.x = 150;
+      player.body.velocity.x = 200;
       player.animations.play('right');
     } else {
         player.body.velocity.x = 0;
@@ -100,11 +107,16 @@ window.onload = function() {
     }
 
     // I want to figure out how to remove the player if they fall
+    // if (!player.inWorld) {
+    //     restart();
+    // }
+    
+    //function restart()
   }
 
 
   function render() {
-
+      game.debug.bodyInfo(player, 16, 24);
   }
 
 };
