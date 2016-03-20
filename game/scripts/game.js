@@ -107,10 +107,10 @@ window.onload = function() {
 
     if (cursors.up.isDown) {
       if (player.body.touching.down && jumpTimer === 0) {
-        player.body.velocity.y = -150;
+        player.body.velocity.y = -75;
         jumpTimer = 1;
-      } else if (jumpTimer < 13 && jumpTimer > 0) {
-        player.body.velocity.y = -150 + (-(jumpTimer * 9));
+      } else if (jumpTimer < 18 && jumpTimer > 0) {
+        player.body.velocity.y = -75 + (-(jumpTimer * 9));
         jumpTimer++;
       }
     } else {
@@ -119,7 +119,7 @@ window.onload = function() {
   }
 
   function render() {
-      game.debug.bodyInfo(player, 16, 24);
+      //game.debug.bodyInfo(player, 16, 24);
   }
 
 };
