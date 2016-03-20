@@ -59,17 +59,28 @@ window.onload = function() {
     ledge.body.immovable = true;
 
     //Create the player
-    player = game.add.sprite(50, game.world.centerY, 'player');
-    game.physics.arcade.enable(player);
-    player.body.bounce.y = 0.2;
-    player.body.gravity.y = 400;
-    player.body.maxVelocity.y = 500;
-    player.body.collideWorldBounds = false;
-    player.checkWorldBounds = true;
-    player.outOfBoundsKill = true;
-    player.body.setSize(20, 32, 5, 16);
-    player.animations.add('left', [0, 1, 2, 3], 10, true);
-    player.animations.add('right', [5, 6, 7, 8], 10, true);
+    function createPlayer() {
+        
+        player = game.add.sprite(50, game.world.centerY, 'player');
+        game.physics.arcade.enable(player);
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 300;
+        player.body.maxVelocity.y = 500;
+        player.body.collideWorldBounds = false;
+        player.checkWorldBounds = true;
+        player.events.onOutOfBounds.add(resetPlayer, this);
+        player.body.setSize(20, 32, 5, 16);
+        player.animations.add('left', [0, 1, 2, 3], 10, true);
+        player.animations.add('right', [5, 6, 7, 8], 10, true);
+        
+    }
+    
+    function resetPlayer() {
+        player.destroy();
+        createPlayer();
+    }
+    
+    createPlayer();
 
     //Create the built-in keyboard
     cursors = game.input.keyboard.createCursorKeys();
@@ -105,15 +116,7 @@ window.onload = function() {
     } else {
       jumpTimer = 0;
     }
-
-    // I want to figure out how to remove the player if they fall
-    // if (!player.inWorld) {
-    //     restart();
-    // }
-    
-    //function restart()
   }
-
 
   function render() {
       game.debug.bodyInfo(player, 16, 24);
