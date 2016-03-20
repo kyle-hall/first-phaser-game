@@ -73,6 +73,9 @@ window.onload = function() {
         player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [5, 6, 7, 8], 10, true);
         
+        //Set the camera to follow the player
+        game.camera.follow(player);
+        
     }
     
     function resetPlayer() {
@@ -84,9 +87,6 @@ window.onload = function() {
 
     //Create the built-in keyboard
     cursors = game.input.keyboard.createCursorKeys();
-
-    //Set the camera to follow the player
-    game.camera.follow(player);
 
   }
 
