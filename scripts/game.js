@@ -61,7 +61,7 @@ window.onload = function() {
     //Create the player
     function createPlayer() {
         
-        player = game.add.sprite(50, game.world.centerY, 'player');
+        player = game.add.sprite(50, game.world.centerY - 25, 'player');
         game.physics.arcade.enable(player);
         player.body.bounce.y = 0.2;
         player.body.gravity.y = 300;
@@ -107,10 +107,10 @@ window.onload = function() {
 
     if (cursors.up.isDown) {
       if (player.body.touching.down && jumpTimer === 0) {
-        player.body.velocity.y = -75;
+        player.body.velocity.y = -95;
         jumpTimer = 1;
       } else if (jumpTimer < 18 && jumpTimer > 0) {
-        player.body.velocity.y = -75 + (-(jumpTimer * 9));
+        player.body.velocity.y = -95 + (-(jumpTimer * 9));
         jumpTimer++;
       }
     } else {
